@@ -30,9 +30,8 @@ $H_A$: The average number of pushups done by line players is statistically diffe
 # Methods
 
 <!--Decide on your methods: use "variable analysis" or other appropriate descriptors. Make sure to choose at least one graphical method and at least one numerical method.!-->
-The number of push ups players can do is numeric.  The position they play is categorical.  
-We will use numeric - categorical 
 
+The response variable is number of push ups in 2 min, the explanatory variable is position: line, or skill.
 
 # Results
 
@@ -43,14 +42,35 @@ We will use numeric - categorical
 ### Graphical Descriptive Results
 
 <!--Graphical results here. Make sure to show your code. Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too. Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
-### Plot boxplots
+
+
+## Now with ggplot - first select the basic data
 
 ```{r}
-boxplot(pushups~position,data=mydata)
+basicCN <- ggplot(mydata,aes(x=position,y=pushups))
 ```
+## Now add in boxplot
+
+```{r}
+basicCN + geom_boxplot()
+```
+  
+  
+### get fancy  
+
+```{r}
+basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
+```
+This boxplot shows that the Skill players seem to be able to do more pushups in 2 minutes than the line.
+
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+favstats(pushups~position,data=mydata)
+```
 
 ## Inferential Results
 
